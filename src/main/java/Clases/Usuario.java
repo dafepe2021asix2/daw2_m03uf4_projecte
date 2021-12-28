@@ -2,40 +2,41 @@ package Clases;
 
 import java.util.Objects;
 
-public class Usuario {
-    private String nombre,pass;
+ abstract public class Usuario extends Persona {
+     protected boolean es_cap;
+     protected String password;
 
-    public Usuario(String nombre, String pass) {
-        this.nombre = nombre;
-        this.pass = pass;
-    }
 
-    public String getNombre() {
-        return nombre;
-    }
+     public Usuario(String dni, String password) {
+         super(dni);
+         this.password = password;
+     }
 
-    public String getPass() {
-        return pass;
-    }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Usuario usuario = (Usuario) o;
-        return Objects.equals(nombre, usuario.nombre) && Objects.equals(pass, usuario.pass);
-    }
+     public Usuario(String dni, String nomCognom, int telefon, String email, String password, boolean es_cap) {
+         super(dni, nomCognom, telefon, email);
+         this.es_cap = es_cap;
+         this.password = password;
+     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(nombre, pass);
-    }
 
-    @Override
-    public String toString() {
-        return "usuarios{" +
-                "nombre='" + nombre + '\'' +
-                ", pass='" + pass + '\'' +
-                '}';
-    }
-}
+     public boolean isEs_cap() {
+         return es_cap;
+     }
+
+     public void setEs_cap(boolean es_cap) {
+         this.es_cap = es_cap;
+     }
+
+     public String getPassword() {
+         return password;
+     }
+
+     public void setPassword(String password) {
+         this.password = password;
+     }
+
+ }
+
+
+

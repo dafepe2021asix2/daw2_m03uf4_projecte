@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-import Clases.CSVmetodos;
-import Clases.Usuari_treballador;
-import Clases.Usuario;
+import Clases.*;
 import Menus.treballador.menu_base;
 import org.beryx.textio.TerminalProperties;
 import org.beryx.textio.TextIO;
@@ -56,6 +54,8 @@ public class ejemplo implements BiConsumer<TextIO, RunnerData> {
 
         TerminalProperties<?> props = terminal.getProperties();
 
+        terminal.setBookmark("LOGIN");
+        boolean es_cap_temp;
         do{
 
             props.setPromptBold(true);
@@ -78,26 +78,61 @@ public class ejemplo implements BiConsumer<TextIO, RunnerData> {
                     .withMinLength(3)
                     .withInputMasking(true)
                     .read("Contraseña");
-            if(csv.getUsuarios().contains(new Usuari_treballador(dni,password))){
-                terminal.printf("\n Clases.Usuario correcto .\n");
-                //csv.getInfo();
+
+            Usuario usuario_temp = new Usuari_treballador(dni,password);
+            Usuario usuario_cap_temp = new Usuari_admin(dni,password);
+
+            usuario_temp =
+                    (csv.getUsuarios().contains(usuario_temp)) ? usuario_temp :
+                    (csv.getUsuarios().contains(usuario_cap_temp)) ? usuario_cap_temp :
+                    null;
+
+            if(usuario_temp != null){
+                Usuario usuario_temp_vfinal = csv.getUsuarios().get(
+                        csv.getUsuarios().indexOf(usuario_temp));
+                String nom_temp = usuario_temp_vfinal.getNomCognom();
+
+                es_cap_temp = usuario_temp_vfinal.isEs_cap();
+                terminal.printf("Usuario y contraseña correcto \n Benvingut %s  %s.\n",nom_temp,es_cap_temp ? "administrador" : "" );
+                for(int i=5; i>=0; i--) {
+                    terminal.resetLine();
+                    delay(500);
+                }
                 break;
             }
 
-            props.setPromptBold(true);
-            props.setPromptUnderline(true);
-            props.setPromptColor("red");
+            else{
+                props.setPromptBold(true);
+                props.setPromptUnderline(true);
+                props.setPromptColor("red");
 
-            terminal.printf("Usuario o contraseña incorrectos\n");
+                terminal.printf("Usuario o contraseña incorrectos\n");
+            }
+
+
 
         }while(true);
+        terminal.resetToBookmark("LOGIN");
 
+        if(es_cap_temp){
 
-        //menu_base.display_menu(terminal);
+        }
+        else{
+            menu_base.display_menu(terminal,textIO);
+        }
+
 
         textIO.newStringInputReader().withMinLength(0).read("\nPress enter to terminate...");
         textIO.dispose("User '"  + "' has left the building.");
     }
+    public static void delay(long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public String toString() {

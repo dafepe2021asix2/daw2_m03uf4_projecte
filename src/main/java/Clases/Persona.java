@@ -12,7 +12,8 @@ abstract public class Persona implements Cloneable {
     protected String email;
 
 
-    public Persona(){
+    public Persona(String dni){
+        this.dni = dni;
     }
     public Persona(String dni, String nomCognom, int telefon, String email) {
         this.dni = dni;
