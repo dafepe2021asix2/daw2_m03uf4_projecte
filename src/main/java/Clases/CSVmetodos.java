@@ -1,76 +1,35 @@
 package Clases;
 
 import com.opencsv.CSVReader;
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
+import com.opencsv.CSVReaderBuilder;
+import com.opencsv.exceptions.CsvException;
+import ratpack.util.internal.PropertiesUtil;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.*;
 
 public class CSVmetodos  {
-    ArrayList<Usuario> usuarios = new ArrayList<>();
-    public  CSVmetodos( String path)  {
+    private ArrayList<Persona> usuarios = new ArrayList<>();
+    public  CSVmetodos( String path) throws FileNotFoundException {
         try (
-            Reader reader = Files.newBufferedReader(Paths.get(path));
-        ){
-            CsvToBean<Usuari_treballador> csvToBean = new CsvToBeanBuilder(reader)
-                .withType(Usuari_treballador.class)
-                .withIgnoreLeadingWhiteSpace(true)
-                .build();
-
-        System.out.println("Llega");
-        List<Employee> list = csvToBean.parse(strategy, csvReader);
-        Iterator<Usuari_treballador> csvUserIterator = csvToBean.iterator();
-        System.out.println(csvUserIterator.toString());
-        while (csvUserIterator.hasNext()) {
-            System.out.println("DNI");
-            Usuari_treballador csvUser = csvUserIterator.next();
-            System.out.println("DNI : " + csvUser.getDni());
-            System.out.println("Name : " + csvUser.getNomCognom());
-            System.out.println("Email : " + csvUser.getEmail());
-            System.out.println("PhoneNo : " + csvUser.getTelefon());
-            System.out.println("Pass : " + csvUser.getPassword());
-            System.out.println("==========================");
-        }
-
+                Reader reader = Files.newBufferedReader(Paths.get(path));
+                CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
+        ) {
+            List<String[]> records = (List<String[]>) csvReader.readAll();
+            for (String[] record : records) {
+                usuarios.add(new Usuari_treballador( record[0], record[1], Integer.parseInt(record[2]), record[3], record[4], Boolean.parseBoolean(record[5])));
+            }
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-/*
-    public void getInfo() {
-
-        System.out.println("DNI");
-
-        Iterator<Usuari_treballador> csvUserIterator = csvToBean.iterator();
-        System.out.println(csvUserIterator.toString());
-        while (csvUserIterator.hasNext()) {
-            System.out.println("DNI");
-            Usuari_treballador csvUser = csvUserIterator.next();
-            System.out.println("DNI : " + csvUser.getDni());
-            System.out.println("Name : " + csvUser.getNomCognom());
-            System.out.println("Email : " + csvUser.getEmail());
-            System.out.println("PhoneNo : " + csvUser.getTelefon());
-            System.out.println("Pass : " + csvUser.getPassword());
-            System.out.println("==========================");
+        } catch (CsvException e) {
+            e.printStackTrace();
         }
 
     }
-    public ArrayList<Usuari_treballador> getUsuarios(){
 
-        ArrayList<Usuari_treballador> lista = new ArrayList<>();
-        Iterator<Usuari_treballador> csvUserIterator = csvToBean.iterator();
-        while (csvUserIterator.hasNext()) {
-            Usuari_treballador csvUser = csvUserIterator.next();
-            System.out.println(csvUser.toString());
-            lista.add(csvUser);
-
-        }
-        return lista;
-    }*/
+    public ArrayList<Persona> getUsuarios() {
+        return usuarios;
+    }
 }

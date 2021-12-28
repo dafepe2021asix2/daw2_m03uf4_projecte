@@ -17,11 +17,14 @@
 import Clases.CSVmetodos;
 import Clases.Usuari_treballador;
 import Clases.Usuario;
+import Menus.treballador.menu_base;
+import org.beryx.textio.TerminalProperties;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextIoFactory;
 import org.beryx.textio.TextTerminal;
 import org.beryx.textio.web.RunnerData;
 
+import java.io.FileNotFoundException;
 import java.util.function.BiConsumer;
 
 /**
@@ -37,38 +40,60 @@ public class ejemplo implements BiConsumer<TextIO, RunnerData> {
     @Override
     public void accept(TextIO textIO, RunnerData runnerData) {
 
+
+
         TextTerminal<?> terminal = textIO.getTextTerminal();
+        String initData = (runnerData == null) ? null : runnerData.getInitData();
+        AppUtil.printGsonMessage(terminal, initData);
 
-        String path = "C:\\Users\\Antiwen\\IdeaProjects\\java_biblioteca_M03\\src\\main\\resources\\CSVDEMO.csv";
-        CSVmetodos csv = new CSVmetodos(path);
+        String path = "src/main/resources/CSVDemo.csv";
+        CSVmetodos csv = null;
+        try {
+            csv = new CSVmetodos(path);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
+        TerminalProperties<?> props = terminal.getProperties();
 
         do{
-            String initData = (runnerData == null) ? null : runnerData.getInitData();
-            AppUtil.printGsonMessage(terminal, initData);
+
+            props.setPromptBold(true);
+            props.setPromptUnderline(true);
+            props.setPromptColor("green");
+            terminal.println("Login usuario");
+
+
+            props.setPromptUnderline(false);
+            props.setPromptBold(false);
+            props.setInputColor("yellow");
+            props.setInputItalic(true);
+
 
             String dni = textIO.newStringInputReader()
                     .withDefaultValue("2132143d")
-                    .read("Clases.Usuario");
+                    .read("Usuario");
 
             String password = textIO.newStringInputReader()
                     .withMinLength(3)
                     .withInputMasking(true)
                     .read("Contraseña");
-            terminal.printf("\n Antes\n");
-            //csv.getInfo();
-            /*
             if(csv.getUsuarios().contains(new Usuari_treballador(dni,password))){
                 terminal.printf("\n Clases.Usuario correcto .\n");
                 //csv.getInfo();
                 break;
-            }*/
+            }
 
-            terminal.printf("\n Clases.Usuario o contraseña in correctos\n");
-            break;
+            props.setPromptBold(true);
+            props.setPromptUnderline(true);
+            props.setPromptColor("red");
+
+            terminal.printf("Usuario o contraseña incorrectos\n");
 
         }while(true);
 
+
+        //menu_base.display_menu(terminal);
 
         textIO.newStringInputReader().withMinLength(0).read("\nPress enter to terminate...");
         textIO.dispose("User '"  + "' has left the building.");

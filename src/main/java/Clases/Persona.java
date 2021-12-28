@@ -5,18 +5,14 @@ import com.opencsv.bean.CsvBindByName;
 import java.util.Objects;
 
 abstract public class Persona implements Cloneable {
-    @CsvBindByName
+
     protected String dni;
-    @CsvBindByName
     protected String NomCognom;
-    @CsvBindByName
     protected int telefon;
-    @CsvBindByName
     protected String email;
 
 
     public Persona(){
-
     }
     public Persona(String dni, String nomCognom, int telefon, String email) {
         this.dni = dni;
