@@ -1,10 +1,10 @@
-package Menus.treballador;
+package Menus.administrador;
 
 import org.beryx.textio.TerminalProperties;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextTerminal;
 
-public class menu_base {
+public class menu_base_admin {
 
     static public void display_menu(TextTerminal<?> terminal, TextIO textIO){
         TerminalProperties<?> props = terminal.getProperties();

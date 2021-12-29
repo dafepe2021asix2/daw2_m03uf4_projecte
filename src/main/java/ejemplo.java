@@ -15,7 +15,8 @@
  */
 
 import Clases.*;
-import Menus.treballador.menu_base;
+import Menus.treballador.menu_base_treballador;
+import Menus.administrador.menu_base_admin;
 import org.beryx.textio.TerminalProperties;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextIoFactory;
@@ -94,10 +95,7 @@ public class ejemplo implements BiConsumer<TextIO, RunnerData> {
 
                 es_cap_temp = usuario_temp_vfinal.isEs_cap();
                 terminal.printf("Usuario y contraseña correcto \n Benvingut %s  %s.\n",nom_temp,es_cap_temp ? "administrador" : "" );
-                for(int i=5; i>=0; i--) {
-                    terminal.resetLine();
-                    delay(500);
-                }
+                textIO.newStringInputReader().withMinLength(0).read("\nEnter para continuar...");
                 break;
             }
 
@@ -115,10 +113,11 @@ public class ejemplo implements BiConsumer<TextIO, RunnerData> {
         terminal.resetToBookmark("LOGIN");
 
         if(es_cap_temp){
+            menu_base_admin.display_menu(terminal,textIO);
 
         }
         else{
-            menu_base.display_menu(terminal,textIO);
+            menu_base_treballador.display_menu(terminal,textIO);
         }
 
 
