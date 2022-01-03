@@ -8,6 +8,7 @@ public class menu_base_treballador {
 
     static public void display_menu(TextTerminal<?> terminal, TextIO textIO){
         TerminalProperties<?> props = terminal.getProperties();
+        terminal.setBookmark("MENU");
         terminal.printf("////////////////////// Menu ////////////////////// \n");
         props.setPromptBold(false);
         props.setPromptUnderline(false);
@@ -17,6 +18,7 @@ public class menu_base_treballador {
                 .read("Opcions: ");
 
         terminal.printf("Seleecio opcio %s",seleccio_menu);
+        terminal.resetToBookmark("MENU");
 
         switch(seleccio_menu) {
             case "Alta":
@@ -29,6 +31,7 @@ public class menu_base_treballador {
                 // code block
                 break;
             case "Llistat":
+                terminal.setBookmark("LLISTAT");
                 // code block
                 break;
             default:

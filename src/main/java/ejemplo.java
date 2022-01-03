@@ -48,7 +48,7 @@ public class ejemplo implements BiConsumer<TextIO, RunnerData> {
         String path = "src/main/resources/CSVDemo.csv";
         CSVmetodos csv = null;
         try {
-            csv = new CSVmetodos(path);
+            csv = new CSVmetodos(path,"usuari");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

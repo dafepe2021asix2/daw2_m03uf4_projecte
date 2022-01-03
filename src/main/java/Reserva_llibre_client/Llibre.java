@@ -1,6 +1,11 @@
 package Reserva_llibre_client;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.Objects;
 
 import Clases.Producte;
@@ -11,7 +16,7 @@ public class Llibre extends Producte {
     private Dades_prestec dades_prestec;
 
 
-    public Llibre(String titol, LocalDate any_publicacio, boolean disponibilitat, String isbn, Genere tipus) {
+    public Llibre(String titol, LocalDate any_publicacio, boolean disponibilitat, String isbn, Genere tipus) throws ParseException {
         super(titol, any_publicacio, disponibilitat);
         this.isbn = isbn;
         this.tipus = tipus;
