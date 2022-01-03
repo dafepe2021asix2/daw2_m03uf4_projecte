@@ -21,6 +21,19 @@ abstract public class Producte implements Cloneable {
         this.disponibilitat=!this.disponibilitat;
     }
 
+
+    public String getTitol() {
+        return titol;
+    }
+
+    public LocalDate getAny_publicacio() {
+        return any_publicacio;
+    }
+
+    public boolean isDisponibilitat() {
+        return disponibilitat;
+    }
+
     @Override
     public String toString() {
         return "Clases.Producte{" +

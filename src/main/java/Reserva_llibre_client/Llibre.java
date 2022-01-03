@@ -39,4 +39,9 @@ public class Llibre extends Producte {
     public int hashCode() {
         return Objects.hash(super.hashCode(), isbn);
     }
+
+    @Override
+    public String toString() {
+        return String.format("%-40s %-20s %-10s %-10s %-10s",titol,any_publicacio,isbn,tipus,disponibilitat);
+    }
 }

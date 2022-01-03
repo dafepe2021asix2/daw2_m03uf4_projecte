@@ -17,11 +17,11 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
 
-public class CSVmetodos  {
-    private ArrayList<Usuario> usuari = new ArrayList<>();
+  public   class CSVmetodos  {
+    private  ArrayList<Usuario> usuari = new ArrayList<>();
 
-    private ArrayList<Llibre> llibre = new ArrayList<>();
-    public  CSVmetodos( String path,String tipo) throws FileNotFoundException {
+    private  ArrayList<Llibre> llibre = new ArrayList<>();
+    public CSVmetodos(String path, String tipo) throws FileNotFoundException {
         try (
                 Reader reader = Files.newBufferedReader(Paths.get(path));
                 CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
@@ -69,4 +69,10 @@ public class CSVmetodos  {
     public ArrayList<Usuario> getUsuarios() {
         return usuari;
     }
-}
+
+      public ArrayList<Llibre> getLlibre() {
+          return llibre;
+      }
+
+
+  }
