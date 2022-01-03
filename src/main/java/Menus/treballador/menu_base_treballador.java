@@ -1,13 +1,16 @@
 package Menus.treballador;
 
+import Menus.Alta;
 import Menus.Llistat;
 import org.beryx.textio.TerminalProperties;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextTerminal;
 
+import java.io.IOException;
+
 public class menu_base_treballador {
 
-    static public void display_menu(TextTerminal<?> terminal, TextIO textIO){
+    static public void display_menu(TextTerminal<?> terminal, TextIO textIO) throws IOException {
         loop : while (true){
 
             TerminalProperties<?> props = terminal.getProperties();
@@ -25,6 +28,8 @@ public class menu_base_treballador {
 
             switch(seleccio_menu) {
                 case "Alta":
+                    terminal.setBookmark("ALTA");
+                    Alta.alta_menu(terminal,textIO);
                     // code block
                     break;
                 case "modificacio":

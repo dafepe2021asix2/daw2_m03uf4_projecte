@@ -24,6 +24,7 @@ import org.beryx.textio.TextTerminal;
 import org.beryx.textio.web.RunnerData;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.function.BiConsumer;
 
 /**
@@ -38,8 +39,6 @@ public class ejemplo implements BiConsumer<TextIO, RunnerData> {
 
     @Override
     public void accept(TextIO textIO, RunnerData runnerData) {
-
-
 
         TextTerminal<?> terminal = textIO.getTextTerminal();
         String initData = (runnerData == null) ? null : runnerData.getInitData();
@@ -117,7 +116,11 @@ public class ejemplo implements BiConsumer<TextIO, RunnerData> {
 
         }
         else{
-            menu_base_treballador.display_menu(terminal,textIO);
+            try {
+                menu_base_treballador.display_menu(terminal,textIO);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
 
