@@ -5,12 +5,16 @@ import Reserva_llibre_client.Llibre;
 import java.io.FileWriter;
 import au.com.bytecode.opencsv.CSVWriter;
 import javassist.expr.NewArray;
+import org.beryx.textio.InputReader;
 import org.beryx.textio.PropertiesConstants;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextTerminal;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Alta {
     public Alta() {
@@ -22,9 +26,33 @@ public class Alta {
         String titol = textIO.newStringInputReader()
                 .withMaxLength(35)
                 .read("Titol: ");
-        String data_publicacio = textIO.newStringInputReader()
-                .withPattern("^(?:3[01]|[12][0-9]|0?[1-9])([/])(0?[1-9]|1[1-2])\\1\\d{4}$")
-                .read("Data de publicació (dd/mm/aaaa): ");
+
+
+
+        String data_publicacio;
+        while(true){
+            data_publicacio = textIO.newStringInputReader()
+                    .withPattern("^(?:3[01]|[12][0-9]|0?[1-9])([/])(0?[1-9]|1[1-2])\\1\\d{4}$")
+                    .read("Data de publicació (dd/mm/aaaa): ");
+
+
+            try {
+                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                format.setLenient(false);
+                format.parse(data_publicacio);
+            }
+            catch (Exception e){
+                String linea = String.format("Date incorrecte: %s", e.getMessage());
+                terminal.executeWithPropertiesConfigurator(
+                        props -> props.setPromptColor("red"),
+                        t -> t.println(linea));
+                continue;
+            }
+            break;
+
+
+        }
+
         String disponibilitat = textIO.newStringInputReader()
                 .withNumberedPossibleValues("true", "false")
                 .read("Disponibilitat: ");
