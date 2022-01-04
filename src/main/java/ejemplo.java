@@ -124,7 +124,8 @@ public class ejemplo implements BiConsumer<TextIO, RunnerData> {
         }
 
 
-        textIO.newStringInputReader().withMinLength(0).read("\nPress enter to terminate...");
+
+
         textIO.dispose("User '"  + "' has left the building.");
     }
     public static void delay(long millis) {
