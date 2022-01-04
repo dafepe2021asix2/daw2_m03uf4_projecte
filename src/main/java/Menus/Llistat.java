@@ -22,7 +22,7 @@ public class Llistat {
         terminal.setBookmark("LLISTAT");
         terminal.executeWithPropertiesPrefix("pre", t -> {
             t.println("----------------------------------------------------------------------------------------------------");
-            t.println(String.format("%-40s %-20s %-10s %-10s %-10s","Titol","Any publicacio","ISBN","Genere","Disponobilitat"));
+            t.println(String.format("%-40s %-13s %-10s %-15s %-10s","Titol","Any publicacio","ISBN","Genere","Disponobilitat"));
             //t.println("  Titol              Any publicacio              ISBN");
             t.println("---------------------------------------------------------------------------------------------------");
             for (Llibre llibre: finalCsv.getLlibre()

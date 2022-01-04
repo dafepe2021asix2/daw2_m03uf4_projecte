@@ -1,14 +1,20 @@
 package Clases;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.util.Locale;
 import java.util.Objects;
 
 abstract public class Producte implements Cloneable {
+
+
 
     protected String titol;
     protected LocalDate any_publicacio;
     protected boolean disponibilitat;
 
+    public Producte(){};
     public Producte(String titol, LocalDate any_publicacio, boolean disponibilitat) {
         this.titol = titol;
         this.any_publicacio = any_publicacio;
@@ -26,12 +32,30 @@ abstract public class Producte implements Cloneable {
         return titol;
     }
 
-    public LocalDate getAny_publicacio() {
-        return any_publicacio;
+    public String getAny_publicacio() {
+        System.out.println("Fecha: "+String.valueOf(any_publicacio));
+        return String.valueOf(any_publicacio);
     }
+
+
 
     public boolean isDisponibilitat() {
         return disponibilitat;
+    }
+
+    public void setTitol(String titol) {
+        this.titol = titol;
+    }
+
+    public void setAny_publicacio(String any_publicacio) {
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate  d1 = LocalDate.parse(any_publicacio, df);
+        System.out.println("La fecha es"+ d1.toString());
+        this.any_publicacio = d1;
+    }
+
+    public void setDisponibilitat(boolean disponibilitat) {
+        this.disponibilitat = disponibilitat;
     }
 
     @Override

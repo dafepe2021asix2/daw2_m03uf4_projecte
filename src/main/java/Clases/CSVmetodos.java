@@ -51,7 +51,7 @@ import java.util.*;
                         break;
                     case "llibre":
 
-                        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                         Date data = df.parse(record[1]);
 
                         LocalDate any_publicacio_localdate = LocalDate.ofInstant(data.toInstant(), ZoneId.systemDefault());

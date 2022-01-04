@@ -1,4 +1,9 @@
 TITULO,FECHA,ESTADO,ISBN,TIPO
-El rubius paga impuestos,01/11/2011,true,isbn1235,TERROR
-Pedro y la especulacion del mercado,12/03/2001,false,isbn1231,AVENTURA
-Pedro porro nos visita,02/12/2001,true,42343225223,DRAMA
+El rubius paga impuestos,2011-03-12,true,isbn1235,TERROR
+Pedro y la especulacion del mercado,2015-07-23,false,isbn1231,AVENTURA
+Pedro porro nos visita,2000-01-02,true,42343225223,DRAMA
+sdsd,1999-12-21,true,232sd,DRAMA
+El penultimo libro,2012-09-12,true,923sdsd,TERROR
+El casi ultimo libro,2012-02-23,false,sd1212,TERROR
+El ultimo libro REMASTER,2022-02-01,false,adsdsdsd,SIN_CATEGORIA
+libros de leer,2022-01-04,false,sdsd2323,AVENTURA
