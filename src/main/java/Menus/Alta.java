@@ -27,13 +27,14 @@ import static org.beryx.textio.ReadInterruptionStrategy.Action.ABORT;
 
 public class Alta {
 
-    private static final List<Runnable> operations = new ArrayList<>();
+    private  final List<Runnable> operations = new ArrayList<>();
 
-    private static void addTask(TextTerminal<?> terminal,TextIO textIO, String prompt, Supplier<String> defaultValueSupplier, Consumer<String> valueSetter) {
+    private  void addTask(TextTerminal<?> terminal,TextIO textIO, String prompt, Supplier<String> defaultValueSupplier, Consumer<String> valueSetter) {
         if(prompt == "Data publicacio"){
             operations.add(() -> valueSetter.accept(fecha(terminal,textIO,defaultValueSupplier)));
         }
         else if(prompt == "GENERE"){
+            System.out.println(Arrays.stream(Genere.class.getEnumConstants()).map(Enum::name).toArray(String[]::new));
             operations.add(() -> valueSetter.accept(textIO.newStringInputReader()
                     .withNumberedPossibleValues( Arrays.stream(Genere.class.getEnumConstants()).map(Enum::name).toArray(String[]::new))
                     .withDefaultValue(defaultValueSupplier.get())
@@ -48,7 +49,7 @@ public class Alta {
 
     }
 
-    private static String fecha(TextTerminal<?> terminal, TextIO textIO, Supplier<String> defaultValueSupplier)  {
+    private  String fecha(TextTerminal<?> terminal, TextIO textIO, Supplier<String> defaultValueSupplier)  {
         String data_publicacio;
         while(true){
             data_publicacio = textIO.newStringInputReader().withDefaultValue(defaultValueSupplier.get())
@@ -76,7 +77,7 @@ public class Alta {
     }
 
 
-    public static void alta_menu(TextTerminal<?> terminal, TextIO textIO) throws IOException {
+    public Alta(TextTerminal<?> terminal, TextIO textIO) throws IOException {
 
         terminal.setBookmark("ALTA");
 

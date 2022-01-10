@@ -29,7 +29,7 @@ public class menu_base_treballador {
             switch(seleccio_menu) {
                 case "Alta":
                     terminal.setBookmark("ALTA");
-                    Alta.alta_menu(terminal,textIO);
+                    Alta alta = new Alta(terminal,textIO);
                     // code block
                     break;
                 case "modificacio":

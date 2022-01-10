@@ -1,7 +1,7 @@
 package Reserva_llibre_client;
 
 public enum Genere {
-    DRAMA,TERROR,AVENTURA,SIN_CATEGORIA;
+    DRAMA,TERROR,AVENTURA,SUSPICIUS,SIN_CATEGORIA;
 
     @Override
     public String toString() {
