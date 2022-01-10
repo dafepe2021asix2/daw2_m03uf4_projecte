@@ -2,6 +2,7 @@ package Menus.treballador;
 
 import Menus.Alta;
 import Menus.Llistat;
+import Menus.Modificacio;
 import org.beryx.textio.TerminalProperties;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextTerminal;
@@ -20,7 +21,7 @@ public class menu_base_treballador {
             props.setPromptUnderline(false);
             props.setPromptColor("white");
             String seleccio_menu = textIO.newStringInputReader()
-                    .withNumberedPossibleValues("Alta", "modificacio", "Eliminacio","Llistat","Sortir")
+                    .withNumberedPossibleValues("Alta", "Modificacio", "Eliminacio","Llistat","Sortir")
                     .read("Opcions: ");
 
             terminal.printf("Seleecio opcio %s",seleccio_menu);
@@ -32,7 +33,9 @@ public class menu_base_treballador {
                     Alta alta = new Alta(terminal,textIO);
                     // code block
                     break;
-                case "modificacio":
+                case "Modificacio":
+                    terminal.setBookmark("MODIFICACIO");
+                    Modificacio.modificacio_menu(terminal,textIO);
                     // code block
                     break;
                 case "Eliminacio":
