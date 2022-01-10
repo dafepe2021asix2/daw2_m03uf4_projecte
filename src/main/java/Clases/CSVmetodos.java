@@ -2,6 +2,7 @@ package Clases;
 
 import Reserva_llibre_client.Genere;
 import Reserva_llibre_client.Llibre;
+import au.com.bytecode.opencsv.CSVWriter;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvException;
@@ -17,11 +18,19 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
 
-public class CSVmetodos  {
-    private ArrayList<Usuario> usuari = new ArrayList<>();
+  public   class CSVmetodos  {
+    private  ArrayList<Usuario> usuari = new ArrayList<>();
 
-    private ArrayList<Llibre> llibre = new ArrayList<>();
-    public  CSVmetodos( String path,String tipo) throws FileNotFoundException {
+    private  ArrayList<Llibre> llibre = new ArrayList<>();
+
+      public CSVmetodos(String path, String [] linea) throws IOException {
+          CSVWriter writer = new CSVWriter(new FileWriter(path, true), ',', CSVWriter.NO_QUOTE_CHARACTER);
+
+          writer.writeNext(linea);
+          writer.close();
+      }
+
+      public CSVmetodos(String path, String tipo) throws FileNotFoundException {
         try (
                 Reader reader = Files.newBufferedReader(Paths.get(path));
                 CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
@@ -42,7 +51,7 @@ public class CSVmetodos  {
                         break;
                     case "llibre":
 
-                        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                         Date data = df.parse(record[1]);
 
                         LocalDate any_publicacio_localdate = LocalDate.ofInstant(data.toInstant(), ZoneId.systemDefault());
@@ -69,4 +78,10 @@ public class CSVmetodos  {
     public ArrayList<Usuario> getUsuarios() {
         return usuari;
     }
-}
+
+      public ArrayList<Llibre> getLlibre() {
+          return llibre;
+      }
+
+
+  }

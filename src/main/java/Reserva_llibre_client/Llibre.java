@@ -15,15 +15,39 @@ public class Llibre extends Producte {
     private Genere tipus;
     private Dades_prestec dades_prestec;
 
-
+    public Llibre( Genere tipus, LocalDate any_publicacio){
+        this.tipus=tipus;
+        this.any_publicacio=any_publicacio;
+    };
     public Llibre(String titol, LocalDate any_publicacio, boolean disponibilitat, String isbn, Genere tipus) throws ParseException {
         super(titol, any_publicacio, disponibilitat);
         this.isbn = isbn;
         this.tipus = tipus;
     }
 
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public void setTipus(Genere tipus) {
+        this.tipus = tipus;
+    }
+
     public void setDades_prestec(Dades_prestec dades_prestec) {
         this.dades_prestec = dades_prestec;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public Genere getTipus() {
+        return tipus;
+    }
+
+    public Dades_prestec getDades_prestec() {
+        return dades_prestec;
     }
 
     @Override
@@ -39,4 +63,14 @@ public class Llibre extends Producte {
     public int hashCode() {
         return Objects.hash(super.hashCode(), isbn);
     }
+
+    @Override
+    public String toString() {
+        return String.format("%-40s %-13s %-10s %-15s %-10s",titol,any_publicacio,isbn,tipus,disponibilitat);
+    }
+    public String [] adaptarCSV() {
+        return new String[] {titol, any_publicacio.toString(), String.valueOf(disponibilitat), isbn, tipus.toString()};
+    }
+
+
 }

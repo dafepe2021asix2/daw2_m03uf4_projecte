@@ -7,8 +7,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="java_biblioteca_M03" />
+        <module name="biblioteca-java" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="biblioteca-java" target="16" />
+      <module name="java_biblioteca_M03" target="16" />
+    </bytecodeTargetLevel>
   </component>
 </project>
