@@ -117,7 +117,7 @@ public class Alta {
         String backKeyStroke = "ctrl U";
         boolean registered = terminal.registerHandler(backKeyStroke, t -> new ReadHandlerData(ABORT));
         if(registered) {
-            terminal.println("During data entry you can press '" + backKeyStroke + "' to go back to the previous field.\n");
+            terminal.println("Puedes pulsar '" + backKeyStroke + "' Para volver al campo anterior.\n");
         }
         int step = 0;
         while(step < operations.size()) {
